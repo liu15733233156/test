@@ -1,0 +1,25 @@
+						if(b>1){
+							b-=1;
+						}else{
+							for(var j = i+1; j < trdata.length; j++){
+								if(trdata[i].area.name==trdata[j].area.name){
+									b+=1;
+								}else{
+									break;
+								}
+							}
+								trHtml += "<td colspan="+ b +">" +trdata[i].area.name+ "</td>";
+						}
+						
+						if(c>1){
+							c-=1;
+						}else{
+							for(var j = i+1; j < trdata.length; j++){
+								if(trdata[i].administratorMobile==trdata[j].administratorMobile){
+									c+=1;
+								}else{
+									break;
+								}
+							}
+							trHtml += "<td colspan="+ c +">" +trdata[i].administratorMobile+ "</td>";
+						}
