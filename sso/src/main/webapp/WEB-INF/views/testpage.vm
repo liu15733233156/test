@@ -1,0 +1,11 @@
+<html>
+#include("common/test_header.vm")
+<body>
+<br/><br/>
+#haha('测试宏...')
+<br/><br/>
+#parse("common/test_parse.vm")
+<br/><br/>
+拦截器调用方法后给的时间参数: ${newdate}
+</body>
+</html>

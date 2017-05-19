@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenpu.user.mapper.UserMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		 id, login_name name, password
+	</sql>
+	
+	<!-- 查询：分页 - 查询列表 -->
+	<select id="selectListByPagination" resultType="user">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM sys_user
+	</select>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="selectById" resultType="user" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_user
+		 WHERE id = #{id}
+	</select>
+	
+	<!-- 查询（根据主键ID查询） -->
+	<select id="selectByUserName" resultType="user" parameterType="java.lang.String">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_user
+		 WHERE login_name = #{userName}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteById" parameterType="java.lang.Long">
+		 DELETE FROM sys_user
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="user">
+		 INSERT INTO sys_user
+ 		(id,age,name,birthday) 
+		 VALUES 
+ 		(#{id},#{age},#{name},#{birthday}) 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="user">
+		 INSERT INTO sys_user
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null">
+				 id,
+			</if>
+			<if test="age != null">
+				 age,
+			</if>
+			<if test="name != null">
+				 name,
+			</if>
+			<if test="birthday != null">
+				 birthday,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null">
+				 #{id},
+			</if>
+			<if test="age != null">
+				 #{age},
+			</if>
+			<if test="name != null">
+				 #{name},
+			</if>
+			<if test="birthday != null">
+				 #{birthday},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByIdSelective" parameterType="user">
+		 UPDATE sys_user
+ 		 <set> 
+			<if test="age != null">
+				 age = #{age},
+			</if>
+			<if test="name != null">
+				 name = #{name},
+			</if>
+			<if test="birthday != null">
+				 birthday = #{birthday},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateById" parameterType="user">
+		 UPDATE sys_user
+		 SET 
+			 age = #{age},
+			 name = #{name},
+			 birthday = #{birthday}
+		 WHERE id = #{id}
+	</update>
+
+</mapper>
